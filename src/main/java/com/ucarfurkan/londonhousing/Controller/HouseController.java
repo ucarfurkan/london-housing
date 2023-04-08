@@ -42,4 +42,9 @@ public class HouseController {
     public void deleteById(@PathVariable Long id){
         houseService.deleteHouseById(id);
     }
+
+    @PutMapping("/update")
+    public House updateHouse(House house){
+        return houseService.updateHouse(house);
+    }
 }

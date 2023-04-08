@@ -37,6 +37,11 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
+    public House updateHouse(House house) {
+        return houseRepository.save(house);
+    }
+
+    @Override
     public House addNewHouse(House house) {
         try {
             return houseRepository.save(house);

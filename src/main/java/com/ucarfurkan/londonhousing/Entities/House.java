@@ -34,4 +34,6 @@ public class House{
     private String city;
     private String postalCode;
 
+    public House(Long l, String london, int v, int i) {
+    }
 }
