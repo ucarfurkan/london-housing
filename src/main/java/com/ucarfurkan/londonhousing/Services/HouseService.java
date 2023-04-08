@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.ucarfurkan.londonhousing.Entities.House;
+import org.springframework.data.repository.query.Param;
 
 public interface HouseService {
     // CREATE
@@ -19,4 +20,16 @@ public interface HouseService {
     // DELETE
     void deleteHouse(House house);
     void deleteHouseById(Long id);
+
+    // SEARCH
+    List<House> search(String propertyName,
+            Long price,
+            String houseType,
+            Long area,
+                       Integer bedrooms,
+                       Integer bathrooms,
+                       Integer receptions,
+            String location,
+            String city,
+            String postalCode);
 }

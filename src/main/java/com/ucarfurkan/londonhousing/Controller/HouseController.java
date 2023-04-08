@@ -38,7 +38,7 @@ public class HouseController {
         houseService.deleteHouse(house);
     }
 
-    @DeleteMapping("/houses/delete/{id]")
+    @DeleteMapping("/houses/delete/{id}")
     public void deleteById(@PathVariable Long id){
         houseService.deleteHouseById(id);
     }
@@ -47,4 +47,21 @@ public class HouseController {
     public House updateHouse(House house){
         return houseService.updateHouse(house);
     }
+
+    @GetMapping("/search")
+    public List<House> search(
+            @RequestParam(name="propertyName", required = false) String propertyName,
+            @RequestParam(name="price", required = false) Long price,
+            @RequestParam(name="houseType", required = false) String houseType,
+            @RequestParam(name="area", required = false) Long area,
+            @RequestParam(name="bedrooms", required = false) Integer bedrooms,
+            @RequestParam(name="bathrooms", required = false) Integer bathrooms,
+            @RequestParam(name="receptions", required = false) Integer receptions,
+            @RequestParam(name="location", required = false) String location,
+            @RequestParam(name="city", required = false) String city,
+            @RequestParam(name="postalCode", required = false) String postalCode) {
+
+        return houseService.search(propertyName,price,houseType,area,bedrooms,bathrooms,receptions,location,city,postalCode);
+    }
+
 }

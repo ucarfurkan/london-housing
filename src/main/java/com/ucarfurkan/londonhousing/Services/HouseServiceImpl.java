@@ -67,4 +67,9 @@ public class HouseServiceImpl implements HouseService {
             throw new RuntimeException("Failed to delete house by id",ex);
         }
     }
+
+    @Override
+    public List<House> search(String propertyName, Long price, String houseType, Long area, Integer bedrooms, Integer bathrooms, Integer receptions, String location, String city, String postalCode) {
+        return houseRepository.search(propertyName,price,houseType,area,bedrooms,bathrooms,receptions,location,city,postalCode);
+    }
 }

@@ -27,13 +27,13 @@ public class House{
     private Long price;
     private String houseType;
     private Long area;
-    private int bedrooms;
-    private int bathrooms;
-    private int receptions;
+    private Integer bedrooms;
+    private Integer bathrooms;
+    private Integer receptions;
     private String location;
     private String city;
     private String postalCode;
 
-    public House(Long l, String london, int v, int i) {
+    public House(Long l, String london, Integer v, Integer i) {
     }
 }
