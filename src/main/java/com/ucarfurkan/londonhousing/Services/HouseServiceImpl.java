@@ -72,12 +72,20 @@ public class HouseServiceImpl implements HouseService {
 
     @Override
     public Page<House> search(String propertyName, Long price, String houseType, Long area, Integer bedrooms, Integer bathrooms, Integer receptions, String location, String city, String postalCode, Pageable pageable) {
-        return houseRepository.search(propertyName,price,houseType,area,bedrooms,bathrooms,receptions,location,city,postalCode, pageable);
+        try {
+            return houseRepository.search(propertyName,price,houseType,area,bedrooms,bathrooms,receptions,location,city,postalCode, pageable);
+        } catch(Exception ex){
+            throw new RuntimeException("Failed to search for houses", ex);
+        }
     }
 
     @Override
     public Page<House> searchWithInterval(Long minPrice, Long maxPrice, Long minArea, Long maxArea, Integer minBedrooms, Integer maxBedrooms, Integer minBathrooms, Integer maxBathrooms, Integer minReceptions, Integer maxReceptions, Pageable pageable) {
-        return houseRepository.searchWithInterval(minPrice,maxPrice,minArea,maxArea,minBedrooms,maxBedrooms,minBathrooms,maxBathrooms,minReceptions,maxReceptions,pageable);
+        try {
+            return houseRepository.searchWithInterval(minPrice,maxPrice,minArea,maxArea,minBedrooms,maxBedrooms,minBathrooms,maxBathrooms,minReceptions,maxReceptions,pageable);
+        } catch(Exception ex){
+            throw new RuntimeException("Failed to search for houses within interval", ex);
+        }
     }
 
 }
