@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import com.ucarfurkan.londonhousing.Entities.House;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 
 public interface HouseService {
@@ -22,7 +24,7 @@ public interface HouseService {
     void deleteHouseById(Long id);
 
     // SEARCH
-    List<House> search(String propertyName,
+    Page<House> search(String propertyName,
             Long price,
             String houseType,
             Long area,
@@ -31,9 +33,10 @@ public interface HouseService {
                        Integer receptions,
             String location,
             String city,
-            String postalCode);
+            String postalCode,
+                       Pageable pageable);
 
-    List<House> searchWithInterval(
+    Page<House> searchWithInterval(
             Long minPrice,
             Long maxPrice,
             Long minArea,
@@ -43,5 +46,6 @@ public interface HouseService {
             Integer minBathrooms,
             Integer maxBathrooms,
             Integer minReceptions,
-            Integer maxReceptions);
+            Integer maxReceptions,
+            Pageable pageable);
 }

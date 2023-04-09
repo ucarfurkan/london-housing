@@ -1,5 +1,7 @@
 package com.ucarfurkan.londonhousing.Repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -22,7 +24,7 @@ public interface HouseRepository extends JpaRepository<House,Long> {
             + "(:location is null or h.location = :location) AND "
             + "(:city is null or h.city = :city) AND "
             + "(:postalCode is null or h.postalCode = :postalCode)")
-    List<House> search(
+    Page<House> search(
             @Param("propertyName") String propertyName,
             @Param("price") Long price,
             @Param("houseType") String houseType,
@@ -32,7 +34,8 @@ public interface HouseRepository extends JpaRepository<House,Long> {
             @Param("receptions") Integer receptions,
             @Param("location") String location,
             @Param("city") String city,
-            @Param("postalCode") String postalCode);
+            @Param("postalCode") String postalCode,
+            Pageable pageable);
 
     @Query("SELECT h FROM House h WHERE "
             + "(:minPrice is null or h.price >= :minPrice) AND "
@@ -45,7 +48,7 @@ public interface HouseRepository extends JpaRepository<House,Long> {
             + "(:maxBathrooms is null or h.bathrooms <= :maxBathrooms) AND "
             + "(:minReceptions is null or h.receptions >= :minReceptions) AND "
             + "(:maxReceptions is null or h.receptions <= :maxReceptions)")
-    List<House> searchWithInterval(
+    Page<House> searchWithInterval(
             @Param("minPrice") Long minPrice,
             @Param("maxPrice") Long maxPrice,
             @Param("minArea") Long minArea,
@@ -55,7 +58,8 @@ public interface HouseRepository extends JpaRepository<House,Long> {
             @Param("minBathrooms") Integer minBathrooms,
             @Param("maxBathrooms") Integer maxBathrooms,
             @Param("minReceptions") Integer minReceptions,
-            @Param("maxReceptions") Integer maxReceptions);
+            @Param("maxReceptions") Integer maxReceptions,
+            Pageable pageable);
 }
 
 

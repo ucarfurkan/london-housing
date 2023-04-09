@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import com.ucarfurkan.londonhousing.Entities.House;
@@ -59,9 +62,13 @@ public class HouseController {
             @RequestParam(name = "receptions", required = false) Integer receptions,
             @RequestParam(name = "location", required = false) String location,
             @RequestParam(name = "city", required = false) String city,
-            @RequestParam(name = "postalCode", required = false) String postalCode) {
+            @RequestParam(name = "postalCode", required = false) String postalCode,
+            @RequestParam(name = "page", required = false) Integer page,
+            @RequestParam(name = "size", required = false) Integer size) {
 
-        return houseService.search(propertyName, price, houseType, area, bedrooms, bathrooms, receptions, location, city, postalCode);
+        Pageable pageable = PageRequest.of(page, size);
+        Page<House> houses = houseService.search(propertyName, price, houseType, area, bedrooms, bathrooms, receptions, location, city, postalCode,pageable);
+        return houses.getContent();
     }
 
     @GetMapping("/search/interval")
@@ -70,7 +77,9 @@ public class HouseController {
             @RequestParam(name = "area", required = false) String areaInterval,
             @RequestParam(name = "bedrooms", required = false) String bedroomsInterval,
             @RequestParam(name = "bathrooms", required = false) String bathroomsInterval,
-            @RequestParam(name = "receptions", required = false) String receptionsInterval) {
+            @RequestParam(name = "receptions", required = false) String receptionsInterval,
+            @RequestParam(name = "page", required = false) Integer page,
+            @RequestParam(name = "size", required = false) Integer size) {
 
         Long minPrice = null;
         Long maxPrice = null;
@@ -132,9 +141,9 @@ public class HouseController {
             }
         }
 
-        return houseService.searchWithInterval(minPrice, maxPrice,
-                minArea, maxArea, minBedrooms, maxBedrooms, minBathrooms,
-                maxBathrooms, minReceptions, maxReceptions);
+        Pageable pageable = PageRequest.of(page, size);
+        Page<House> houses = houseService.searchWithInterval(minPrice,maxPrice,minArea,maxArea,minBedrooms,maxBedrooms,minBathrooms,maxBathrooms,minReceptions,maxReceptions,pageable);
+        return houses.getContent();
     }
 }
 
