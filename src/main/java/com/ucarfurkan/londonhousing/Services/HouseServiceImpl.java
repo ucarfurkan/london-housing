@@ -72,4 +72,10 @@ public class HouseServiceImpl implements HouseService {
     public List<House> search(String propertyName, Long price, String houseType, Long area, Integer bedrooms, Integer bathrooms, Integer receptions, String location, String city, String postalCode) {
         return houseRepository.search(propertyName,price,houseType,area,bedrooms,bathrooms,receptions,location,city,postalCode);
     }
+
+    @Override
+    public List<House> searchWithInterval(Long minPrice, Long maxPrice, Long minArea, Long maxArea, Integer minBedrooms, Integer maxBedrooms, Integer minBathrooms, Integer maxBathrooms, Integer minReceptions, Integer maxReceptions) {
+        return houseRepository.searchWithInterval(minPrice,maxPrice,minArea,maxArea,minBedrooms,maxBedrooms,minBathrooms,maxBathrooms,minReceptions,maxReceptions);
+    }
+
 }

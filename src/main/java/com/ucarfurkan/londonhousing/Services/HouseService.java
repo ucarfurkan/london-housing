@@ -32,4 +32,16 @@ public interface HouseService {
             String location,
             String city,
             String postalCode);
+
+    List<House> searchWithInterval(
+            Long minPrice,
+            Long maxPrice,
+            Long minArea,
+            Long maxArea,
+            Integer minBedrooms,
+            Integer maxBedrooms,
+            Integer minBathrooms,
+            Integer maxBathrooms,
+            Integer minReceptions,
+            Integer maxReceptions);
 }

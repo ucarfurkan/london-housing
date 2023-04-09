@@ -33,4 +33,29 @@ public interface HouseRepository extends JpaRepository<House,Long> {
             @Param("location") String location,
             @Param("city") String city,
             @Param("postalCode") String postalCode);
+
+    @Query("SELECT h FROM House h WHERE "
+            + "(:minPrice is null or h.price >= :minPrice) AND "
+            + "(:maxPrice is null or h.price <= :maxPrice) AND "
+            + "(:minArea is null or h.area >= :minArea) AND "
+            + "(:maxArea is null or h.area <= :maxArea) AND "
+            + "(:minBedrooms is null or h.bedrooms >= :minBedrooms) AND "
+            + "(:maxBedrooms is null or h.bedrooms <= :maxBedrooms) AND "
+            + "(:minBathrooms is null or h.bathrooms >= :minBathrooms) AND "
+            + "(:maxBathrooms is null or h.bathrooms <= :maxBathrooms) AND "
+            + "(:minReceptions is null or h.receptions >= :minReceptions) AND "
+            + "(:maxReceptions is null or h.receptions <= :maxReceptions)")
+    List<House> searchWithInterval(
+            @Param("minPrice") Long minPrice,
+            @Param("maxPrice") Long maxPrice,
+            @Param("minArea") Long minArea,
+            @Param("maxArea") Long maxArea,
+            @Param("minBedrooms") Integer minBedrooms,
+            @Param("maxBedrooms") Integer maxBedrooms,
+            @Param("minBathrooms") Integer minBathrooms,
+            @Param("maxBathrooms") Integer maxBathrooms,
+            @Param("minReceptions") Integer minReceptions,
+            @Param("maxReceptions") Integer maxReceptions);
 }
+
+
