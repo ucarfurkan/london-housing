@@ -33,18 +33,8 @@ public class HouseController {
     }
 
     @PostMapping("/houses/add")
-    public House addNewHouse(@Valid
-                             @RequestParam(name = "propertyName") String propertyName,
-                             @RequestParam(name = "price") Long price,
-                             @RequestParam(name = "houseType") String houseType,
-                             @RequestParam(name = "area") Long area,
-                             @RequestParam(name = "bedrooms" , required = false) Integer bedrooms,
-                             @RequestParam(name = "bathrooms", required = false) Integer bathrooms,
-                             @RequestParam(name = "receptions", required = false) Integer receptions,
-                             @RequestParam(name = "location", required = false) String location,
-                             @RequestParam(name = "city", required = false) String city,
-                             @RequestParam(name = "postalCode", required = false) String postalCode) {
-        House house = new House(propertyName,price,houseType,area,bedrooms,bathrooms,receptions,location,city,postalCode);
+    public House addNewHouse(@Valid @RequestBody House house) {
+        house.setId(null);
         return houseService.addNewHouse(house);
     }
 
@@ -60,6 +50,7 @@ public class HouseController {
 
     @PutMapping("/update")
     public House updateHouse(@RequestBody House house) {
+
         return houseService.updateHouse(house);
     }
 

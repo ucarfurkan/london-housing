@@ -25,7 +25,6 @@ public class House{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @PositiveOrZero
     private Long id;
 
     @NotNull(message = "propertyName can not be null.")
