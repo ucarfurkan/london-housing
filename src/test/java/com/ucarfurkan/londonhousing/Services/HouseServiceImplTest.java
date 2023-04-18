@@ -74,7 +74,7 @@ class HouseServiceImplTest {
     void findHouseById() {
         when(houseRepository.findById(2L)).thenReturn(Optional.of(house2));
         Optional<House> result = houseService.findHouseById(2L);
-        assertEquals(house2,result.get());
+        assertEquals(house2,result.orElse(null));
     }
 
     @Test

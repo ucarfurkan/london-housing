@@ -6,7 +6,6 @@ import java.util.Optional;
 import com.ucarfurkan.londonhousing.Entities.House;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.query.Param;
 
 public interface HouseService {
     // CREATE

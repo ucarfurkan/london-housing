@@ -84,9 +84,8 @@ public class HouseController {
             Page<House> houses = houseService.searchWithPagination(propertyName, price, houseType, area, bedrooms, bathrooms, receptions, location, city, postalCode,pageable);
             return houses.getContent();
         }
-        List<House> houses = houseService.searchWithoutPagination(propertyName, price, houseType, area, bedrooms, bathrooms, receptions, location, city, postalCode);
 
-        return houses;
+        return houseService.searchWithoutPagination(propertyName, price, houseType, area, bedrooms, bathrooms, receptions, location, city, postalCode);
     }
 
     @GetMapping("/search/interval")
@@ -165,8 +164,7 @@ public class HouseController {
             return houses.getContent();
         }
 
-        List<House> houses = houseService.searchWithIntervalAndWithoutPagination(minPrice,maxPrice,minArea,maxArea,minBedrooms,maxBedrooms,minBathrooms,maxBathrooms,minReceptions,maxReceptions);
-        return houses;
+        return houseService.searchWithIntervalAndWithoutPagination(minPrice,maxPrice,minArea,maxArea,minBedrooms,maxBedrooms,minBathrooms,maxBathrooms,minReceptions,maxReceptions);
     }
 }
 
