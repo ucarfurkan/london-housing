@@ -112,11 +112,11 @@ class HouseServiceImplTest {
         Pageable pageable = PageRequest.of(0,10);
         Page<House> testHouse = new PageImpl<>(searchList,pageable,1);
 
-        when(houseRepository.search("property name2", null, null,
+        when(houseRepository.searchWithPagination("property name2", null, null,
                 null, null, null, null,
                 null, null, null, pageable)).thenReturn(testHouse);
 
-        Page<House> page = houseService.search("property name2", null, null,
+        Page<House> page = houseService.searchWithPagination("property name2", null, null,
                 null, null, null, null,
                 null, null, null, pageable);
         assertEquals(1, page.getContent().size());
@@ -129,11 +129,11 @@ class HouseServiceImplTest {
         Pageable pageable = PageRequest.of(0,10);
         Page<House> testHouse = new PageImpl<>(houseList,pageable,2);
 
-        when(houseService.searchWithInterval(300L,301L,null,null,
+        when(houseService.searchWithIntervalAndPagination(300L,301L,null,null,
                 null,null,null,null,
                 null,null,pageable)).thenReturn(testHouse);
 
-        Page<House> page = houseService.searchWithInterval(300L,301L,null,null,
+        Page<House> page = houseService.searchWithIntervalAndPagination(300L,301L,null,null,
                 null,null,null,null,
                 null,null,pageable);
 
@@ -141,11 +141,11 @@ class HouseServiceImplTest {
         assertTrue(page.getContent().contains(house1));
         assertTrue(page.getContent().contains(house2));
 
-        when(houseService.searchWithInterval(300L,301L,null,null,
+        when(houseService.searchWithIntervalAndPagination(300L,301L,null,null,
                 3,4,null,null,
                 null,null,pageable)).thenReturn(new PageImpl<>(new ArrayList<>(),pageable,0));
 
-        Page<House> page1 = houseService.searchWithInterval(300L,301L,null,null,
+        Page<House> page1 = houseService.searchWithIntervalAndPagination(300L,301L,null,null,
                 3,4,null,null,
                 null,null,pageable);
         assertEquals(0, page1.getContent().size());

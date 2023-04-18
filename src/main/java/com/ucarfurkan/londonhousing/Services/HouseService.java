@@ -24,7 +24,7 @@ public interface HouseService {
     void deleteHouseById(Long id);
 
     // SEARCH
-    Page<House> search(String propertyName,
+    Page<House> searchWithPagination(String propertyName,
             Long price,
             String houseType,
             Long area,
@@ -36,7 +36,18 @@ public interface HouseService {
             String postalCode,
                        Pageable pageable);
 
-    Page<House> searchWithInterval(
+    List<House> searchWithoutPagination(String propertyName,
+                                     Long price,
+                                     String houseType,
+                                     Long area,
+                                     Integer bedrooms,
+                                     Integer bathrooms,
+                                     Integer receptions,
+                                     String location,
+                                     String city,
+                                     String postalCode);
+
+    Page<House> searchWithIntervalAndPagination(
             Long minPrice,
             Long maxPrice,
             Long minArea,
@@ -48,4 +59,16 @@ public interface HouseService {
             Integer minReceptions,
             Integer maxReceptions,
             Pageable pageable);
+
+    List<House> searchWithIntervalAndWithoutPagination(
+            Long minPrice,
+            Long maxPrice,
+            Long minArea,
+            Long maxArea,
+            Integer minBedrooms,
+            Integer maxBedrooms,
+            Integer minBathrooms,
+            Integer maxBathrooms,
+            Integer minReceptions,
+            Integer maxReceptions);
 }

@@ -5,6 +5,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,14 +25,34 @@ public class House{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @PositiveOrZero
     private Long id;
+
+    @NotNull(message = "propertyName can not be null.")
+    @NotBlank(message = "propertyName can not be blank.")
     private String propertyName;
+
+    @NotNull(message = "price can not be null.")
+    @PositiveOrZero(message = "price can not be less than zero.")
     private Long price;
+
+    @NotNull(message = "houseType can not be null.")
+    @NotBlank(message = "houseType can not be blank.")
     private String houseType;
+
+    @NotNull(message = "area can not be null.")
+    @PositiveOrZero(message = "area can not be less than zero.")
     private Long area;
+
+    @PositiveOrZero(message = "bedrooms can not be less than zero.")
     private Integer bedrooms;
+
+    @PositiveOrZero(message = "bathrooms can not be less than zero.")
     private Integer bathrooms;
+
+    @PositiveOrZero(message = "receptions can not be less than zero.")
     private Integer receptions;
+
     private String location;
     private String city;
     private String postalCode;

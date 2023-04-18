@@ -71,18 +71,36 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public Page<House> search(String propertyName, Long price, String houseType, Long area, Integer bedrooms, Integer bathrooms, Integer receptions, String location, String city, String postalCode, Pageable pageable) {
+    public Page<House> searchWithPagination(String propertyName, Long price, String houseType, Long area, Integer bedrooms, Integer bathrooms, Integer receptions, String location, String city, String postalCode, Pageable pageable) {
         try {
-            return houseRepository.search(propertyName,price,houseType,area,bedrooms,bathrooms,receptions,location,city,postalCode, pageable);
+            return houseRepository.searchWithPagination(propertyName,price,houseType,area,bedrooms,bathrooms,receptions,location,city,postalCode, pageable);
         } catch(Exception ex){
             throw new RuntimeException("Failed to search for houses", ex);
         }
     }
 
     @Override
-    public Page<House> searchWithInterval(Long minPrice, Long maxPrice, Long minArea, Long maxArea, Integer minBedrooms, Integer maxBedrooms, Integer minBathrooms, Integer maxBathrooms, Integer minReceptions, Integer maxReceptions, Pageable pageable) {
+    public List<House> searchWithoutPagination(String propertyName, Long price, String houseType, Long area, Integer bedrooms, Integer bathrooms, Integer receptions, String location, String city, String postalCode) {
         try {
-            return houseRepository.searchWithInterval(minPrice,maxPrice,minArea,maxArea,minBedrooms,maxBedrooms,minBathrooms,maxBathrooms,minReceptions,maxReceptions,pageable);
+            return houseRepository.searchWithoutPagination(propertyName,price,houseType,area,bedrooms,bathrooms,receptions,location,city,postalCode);
+        } catch(Exception ex){
+            throw new RuntimeException("Failed to search for houses", ex);
+        }
+    }
+
+    @Override
+    public Page<House> searchWithIntervalAndPagination(Long minPrice, Long maxPrice, Long minArea, Long maxArea, Integer minBedrooms, Integer maxBedrooms, Integer minBathrooms, Integer maxBathrooms, Integer minReceptions, Integer maxReceptions, Pageable pageable) {
+        try {
+            return houseRepository.searchWithIntervalAndPagination(minPrice,maxPrice,minArea,maxArea,minBedrooms,maxBedrooms,minBathrooms,maxBathrooms,minReceptions,maxReceptions,pageable);
+        } catch(Exception ex){
+            throw new RuntimeException("Failed to search for houses within interval", ex);
+        }
+    }
+
+    @Override
+    public List<House> searchWithIntervalAndWithoutPagination(Long minPrice, Long maxPrice, Long minArea, Long maxArea, Integer minBedrooms, Integer maxBedrooms, Integer minBathrooms, Integer maxBathrooms, Integer minReceptions, Integer maxReceptions) {
+        try {
+            return houseRepository.searchWithIntervalAndWithoutPagination(minPrice,maxPrice,minArea,maxArea,minBedrooms,maxBedrooms,minBathrooms,maxBathrooms,minReceptions,maxReceptions);
         } catch(Exception ex){
             throw new RuntimeException("Failed to search for houses within interval", ex);
         }

@@ -3,6 +3,7 @@ package com.ucarfurkan.londonhousing.Controller;
 import java.util.List;
 import java.util.Optional;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -32,7 +33,7 @@ public class HouseController {
     }
 
     @PostMapping("/houses/add")
-    public House addNewHouse(@RequestBody House house) {
+    public House addNewHouse(@Valid @RequestBody House house) {
         return houseService.addNewHouse(house);
     }
 
@@ -47,7 +48,7 @@ public class HouseController {
     }
 
     @PutMapping("/update")
-    public House updateHouse(House house) {
+    public House updateHouse(@RequestBody House house) {
         return houseService.updateHouse(house);
     }
 
@@ -66,9 +67,15 @@ public class HouseController {
             @RequestParam(name = "page", required = false) Integer page,
             @RequestParam(name = "size", required = false) Integer size) {
 
-        Pageable pageable = PageRequest.of(page, size);
-        Page<House> houses = houseService.search(propertyName, price, houseType, area, bedrooms, bathrooms, receptions, location, city, postalCode,pageable);
-        return houses.getContent();
+
+        if(page!=null && size!=null){
+            Pageable pageable = PageRequest.of(page, size);
+            Page<House> houses = houseService.searchWithPagination(propertyName, price, houseType, area, bedrooms, bathrooms, receptions, location, city, postalCode,pageable);
+            return houses.getContent();
+        }
+        List<House> houses = houseService.searchWithoutPagination(propertyName, price, houseType, area, bedrooms, bathrooms, receptions, location, city, postalCode);
+
+        return houses;
     }
 
     @GetMapping("/search/interval")
@@ -141,9 +148,14 @@ public class HouseController {
             }
         }
 
-        Pageable pageable = PageRequest.of(page, size);
-        Page<House> houses = houseService.searchWithInterval(minPrice,maxPrice,minArea,maxArea,minBedrooms,maxBedrooms,minBathrooms,maxBathrooms,minReceptions,maxReceptions,pageable);
-        return houses.getContent();
+        if(page!=null && size!=null){
+            Pageable pageable = PageRequest.of(page, size);
+            Page<House> houses = houseService.searchWithIntervalAndPagination(minPrice,maxPrice,minArea,maxArea,minBedrooms,maxBedrooms,minBathrooms,maxBathrooms,minReceptions,maxReceptions,pageable);
+            return houses.getContent();
+        }
+
+        List<House> houses = houseService.searchWithIntervalAndWithoutPagination(minPrice,maxPrice,minArea,maxArea,minBedrooms,maxBedrooms,minBathrooms,maxBathrooms,minReceptions,maxReceptions);
+        return houses;
     }
 }
 
