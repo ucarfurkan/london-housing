@@ -69,22 +69,22 @@ public class HouseController {
         if (StringUtils.isNotBlank(propertyName)) {
             house.setPropertyName(propertyName);
         }
-        if (price != null){
+        if (price != null && price>=0){
             house.setPrice(price);
         }
         if (StringUtils.isNotBlank(houseType)) {
             house.setHouseType(houseType);
         }
-        if (area != null){
+        if (area != null && area>=0){
             house.setArea(area);
         }
-        if (bedrooms != null){
+        if (bedrooms != null && bedrooms>=0){
             house.setBedrooms(bedrooms);
         }
-        if (bathrooms != null){
+        if (bathrooms != null && bathrooms>=0){
             house.setBathrooms(bathrooms);
         }
-        if (receptions != null){
+        if (receptions != null && receptions>=0){
             house.setReceptions(receptions);
         }
         if (StringUtils.isNotBlank(location)) {
