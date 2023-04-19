@@ -45,6 +45,33 @@ You can skip the id value and let it stay that way, the application is going to 
 
 **3- search:** There are parameters, like propertyName, price, houseType, area, bedrooms, bathrooms, receptions, location, city, and postalCode. You need to pass the values that you are searching for. If you left the page and the size empty, it's not going to be paginated and all the results matched will get. Otherwise, if you provide size and page values, it's going to do pagination and results will be get. If you left all the fields empty, all the results without any filtering will get.
 
-**4- search/interval:** You need you that operation if you want to search House objects with intervals.
+**4- search/interval:** You need that operation if you want to search House objects with intervals. You need to write your intervals as "(min_price)-(max_price)" syntax, for number values. If you write only one number, without "-", the application is gonna recognize it as a minimum value and return the House objects who has that and higher values. If you left the page and the size empty, it's not going to be paginated and all the results matched will get. Otherwise, if you provide size and page values, it's going to do pagination and results will be get. If you left all the fields empty, all the results without any filtering will get.
+
+**5- houses:** It's going to get all House objects when you perform that operation.
+
+**6- houses/{id}:** It has only one parameter, id, and it's required. When you write an id and execute the operation, it's going to return the House object with that id, if exists, otherwise, it's going to return null.
+
+**7- delete:** You need to provide a request body, such as:
+
+```
+{
+  "id": 0,
+  "propertyName": "string",
+  "price": 0,
+  "houseType": "string",
+  "area": 0,
+  "bedrooms": 0,
+  "bathrooms": 0,
+  "receptions": 0,
+  "location": "string",
+  "city": "string",
+  "postalCode": "string"
+}
+```
+
+and if the request body you provided exists, when you execute the operation, the House object you provide is going to be deleted.
+
+**8- delete/{id}:** It has only one parameter, id, and it's required. When you provide an id, if exists, it's going to be deleted when you perform this operation.
+
 
  
