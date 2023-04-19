@@ -88,7 +88,9 @@ HouseService interface declares methods for CRUD operations and searching for ho
 ### HouseServiceImpl:
 The HouseServiceImpl class implements the HouseService interface and provides implementations for all the methods declared in the interface. The class uses an instance of HouseRepository to interact with the database.
 
-## Testing
+---
+
+## <ins>Testing</ins>
 Test of all HouseServiceImpl is created, using Mockito and JUnit.
 
  
