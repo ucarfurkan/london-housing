@@ -71,7 +71,7 @@ You can skip the id value and let it stay that way, the application is going to 
 }
 ```
 
-and if the request body you provided exists, when you execute the operation, the House object you provide is going to be deleted.
+and if the request body's id you provided exists, when you execute the operation, the House object with that id is going to be deleted.
 
 **8- delete/{id}:** It has only one parameter, id, and it's required. When you provide an id, if exists, it's going to be deleted when you perform this operation.
 
