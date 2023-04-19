@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import jakarta.validation.Valid;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -49,7 +50,52 @@ public class HouseController {
     }
 
     @PutMapping("/update")
-    public House updateHouse(@RequestBody House house) {
+    public House updateHouse(
+                             @RequestParam(name = "id") Long id,
+                             @RequestParam(name = "propertyName", required = false) String propertyName,
+                             @RequestParam(name = "price", required = false) Long price,
+                             @RequestParam(name = "houseType", required = false) String houseType,
+                             @RequestParam(name = "area", required = false) Long area,
+                             @RequestParam(name = "bedrooms", required = false) Integer bedrooms,
+                             @RequestParam(name = "bathrooms", required = false) Integer bathrooms,
+                             @RequestParam(name = "receptions", required = false) Integer receptions,
+                             @RequestParam(name = "location", required = false) String location,
+                             @RequestParam(name = "city", required = false) String city,
+                             @RequestParam(name = "postalCode", required = false) String postalCode) {
+        Optional<House> houseOptional = houseService.findHouseById(id);
+
+        House house = houseOptional.get();
+
+        if (StringUtils.isNotBlank(propertyName)) {
+            house.setPropertyName(propertyName);
+        }
+        if (price != null){
+            house.setPrice(price);
+        }
+        if (StringUtils.isNotBlank(houseType)) {
+            house.setHouseType(houseType);
+        }
+        if (area != null){
+            house.setArea(area);
+        }
+        if (bedrooms != null){
+            house.setBedrooms(bedrooms);
+        }
+        if (bathrooms != null){
+            house.setBathrooms(bathrooms);
+        }
+        if (receptions != null){
+            house.setReceptions(receptions);
+        }
+        if (StringUtils.isNotBlank(location)) {
+            house.setLocation(location);
+        }
+        if (StringUtils.isNotBlank(city)) {
+            house.setCity(city);
+        }
+        if (StringUtils.isNotBlank(postalCode)) {
+            house.setPostalCode(postalCode);
+        }
 
         return houseService.updateHouse(house);
     }
