@@ -89,18 +89,18 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public Page<House> searchWithIntervalAndPagination(Long minPrice, Long maxPrice, Long minArea, Long maxArea, Integer minBedrooms, Integer maxBedrooms, Integer minBathrooms, Integer maxBathrooms, Integer minReceptions, Integer maxReceptions, Pageable pageable) {
+    public Page<House> searchWithIntervalAndPagination(String propertyName, Long minPrice, Long maxPrice, String houseType, Long minArea, Long maxArea, Integer minBedrooms, Integer maxBedrooms, Integer minBathrooms, Integer maxBathrooms, Integer minReceptions, Integer maxReceptions, String location, String city, String postalCode, Pageable pageable) {
         try {
-            return houseRepository.searchWithIntervalAndPagination(minPrice,maxPrice,minArea,maxArea,minBedrooms,maxBedrooms,minBathrooms,maxBathrooms,minReceptions,maxReceptions,pageable);
+            return houseRepository.searchWithIntervalAndPagination(propertyName, minPrice,maxPrice,houseType,minArea,maxArea,minBedrooms,maxBedrooms,minBathrooms,maxBathrooms,minReceptions,maxReceptions, location, city, postalCode, pageable);
         } catch(Exception ex){
             throw new RuntimeException("Failed to search for houses within interval", ex);
         }
     }
 
     @Override
-    public List<House> searchWithIntervalAndWithoutPagination(Long minPrice, Long maxPrice, Long minArea, Long maxArea, Integer minBedrooms, Integer maxBedrooms, Integer minBathrooms, Integer maxBathrooms, Integer minReceptions, Integer maxReceptions) {
+    public List<House> searchWithIntervalAndWithoutPagination(String propertyName, Long minPrice, Long maxPrice, String houseType, Long minArea, Long maxArea, Integer minBedrooms, Integer maxBedrooms, Integer minBathrooms, Integer maxBathrooms, Integer minReceptions, Integer maxReceptions, String location, String city, String postalCode) {
         try {
-            return houseRepository.searchWithIntervalAndWithoutPagination(minPrice,maxPrice,minArea,maxArea,minBedrooms,maxBedrooms,minBathrooms,maxBathrooms,minReceptions,maxReceptions);
+            return houseRepository.searchWithIntervalAndWithoutPagination(propertyName, minPrice,maxPrice,houseType,minArea,maxArea,minBedrooms,maxBedrooms,minBathrooms,maxBathrooms,minReceptions,maxReceptions, location, city, postalCode);
         } catch(Exception ex){
             throw new RuntimeException("Failed to search for houses within interval", ex);
         }

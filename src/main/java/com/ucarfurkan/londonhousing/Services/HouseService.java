@@ -47,8 +47,10 @@ public interface HouseService {
                                      String postalCode);
 
     Page<House> searchWithIntervalAndPagination(
+            String propertyName,
             Long minPrice,
             Long maxPrice,
+            String houseType,
             Long minArea,
             Long maxArea,
             Integer minBedrooms,
@@ -57,11 +59,16 @@ public interface HouseService {
             Integer maxBathrooms,
             Integer minReceptions,
             Integer maxReceptions,
+            String location,
+            String city,
+            String postalCode,
             Pageable pageable);
 
     List<House> searchWithIntervalAndWithoutPagination(
+            String propertyName,
             Long minPrice,
             Long maxPrice,
+            String houseType,
             Long minArea,
             Long maxArea,
             Integer minBedrooms,
@@ -69,5 +76,8 @@ public interface HouseService {
             Integer minBathrooms,
             Integer maxBathrooms,
             Integer minReceptions,
-            Integer maxReceptions);
+            Integer maxReceptions,
+            String location,
+            String city,
+            String postalCode);
 }

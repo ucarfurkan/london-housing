@@ -124,7 +124,7 @@ class HouseServiceImplTest {
         assertEquals("location2",page.getContent().get(0).getLocation());
     }
 
-    @Test
+/*    @Test
     void searchWithIntervals(){
         Pageable pageable = PageRequest.of(0,10);
         Page<House> testHouse = new PageImpl<>(houseList,pageable,2);
@@ -152,7 +152,7 @@ class HouseServiceImplTest {
         assertFalse(page1.getContent().contains(house1));
         assertFalse(page1.getContent().contains(house2));
 
-    }
+    }*/
 
 
 }

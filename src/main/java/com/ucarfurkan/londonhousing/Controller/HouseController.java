@@ -127,11 +127,16 @@ public class HouseController {
 
     @GetMapping("/search/interval")
     public List<House> searchWithInterval(
+            @RequestParam(name = "propertyName", required = false) String propertyName,
             @RequestParam(name = "price", required = false) String priceInterval,
+            @RequestParam(name = "houseType", required = false) String houseType,
             @RequestParam(name = "area", required = false) String areaInterval,
             @RequestParam(name = "bedrooms", required = false) String bedroomsInterval,
             @RequestParam(name = "bathrooms", required = false) String bathroomsInterval,
             @RequestParam(name = "receptions", required = false) String receptionsInterval,
+            @RequestParam(name = "location", required = false) String location,
+            @RequestParam(name = "city", required = false) String city,
+            @RequestParam(name = "postalCode", required = false) String postalCode,
             @RequestParam(name = "page", required = false) Integer page,
             @RequestParam(name = "size", required = false) Integer size) {
 
@@ -197,11 +202,11 @@ public class HouseController {
 
         if(page!=null && size!=null){
             Pageable pageable = PageRequest.of(page, size);
-            Page<House> houses = houseService.searchWithIntervalAndPagination(minPrice,maxPrice,minArea,maxArea,minBedrooms,maxBedrooms,minBathrooms,maxBathrooms,minReceptions,maxReceptions,pageable);
+            Page<House> houses = houseService.searchWithIntervalAndPagination(propertyName,minPrice,maxPrice,houseType,minArea,maxArea,minBedrooms,maxBedrooms,minBathrooms,maxBathrooms,minReceptions,maxReceptions, location, city, postalCode, pageable);
             return houses.getContent();
         }
 
-        return houseService.searchWithIntervalAndWithoutPagination(minPrice,maxPrice,minArea,maxArea,minBedrooms,maxBedrooms,minBathrooms,maxBathrooms,minReceptions,maxReceptions);
+        return houseService.searchWithIntervalAndWithoutPagination(propertyName,minPrice,maxPrice,houseType,minArea,maxArea,minBedrooms,maxBedrooms,minBathrooms,maxBathrooms,minReceptions,maxReceptions, location, city, postalCode);
     }
 }
 

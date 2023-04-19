@@ -61,8 +61,10 @@ public interface HouseRepository extends JpaRepository<House,Long> {
             @Param("postalCode") String postalCode);
 
     @Query("SELECT h FROM House h WHERE "
+            + "(:propertyName is null or h.propertyName = :propertyName) AND "
             + "(:minPrice is null or h.price >= :minPrice) AND "
             + "(:maxPrice is null or h.price <= :maxPrice) AND "
+            + "(:houseType is null or h.houseType = :houseType) AND "
             + "(:minArea is null or h.area >= :minArea) AND "
             + "(:maxArea is null or h.area <= :maxArea) AND "
             + "(:minBedrooms is null or h.bedrooms >= :minBedrooms) AND "
@@ -70,10 +72,15 @@ public interface HouseRepository extends JpaRepository<House,Long> {
             + "(:minBathrooms is null or h.bathrooms >= :minBathrooms) AND "
             + "(:maxBathrooms is null or h.bathrooms <= :maxBathrooms) AND "
             + "(:minReceptions is null or h.receptions >= :minReceptions) AND "
-            + "(:maxReceptions is null or h.receptions <= :maxReceptions)")
+            + "(:maxReceptions is null or h.receptions <= :maxReceptions) AND "
+            + "(:location is null or h.location = :location) AND "
+            + "(:city is null or h.city = :city) AND "
+            + "(:postalCode is null or h.postalCode = :postalCode)")
     Page<House> searchWithIntervalAndPagination(
+            @Param("propertyName") String propertyName,
             @Param("minPrice") Long minPrice,
             @Param("maxPrice") Long maxPrice,
+            @Param("houseType") String houseType,
             @Param("minArea") Long minArea,
             @Param("maxArea") Long maxArea,
             @Param("minBedrooms") Integer minBedrooms,
@@ -82,11 +89,16 @@ public interface HouseRepository extends JpaRepository<House,Long> {
             @Param("maxBathrooms") Integer maxBathrooms,
             @Param("minReceptions") Integer minReceptions,
             @Param("maxReceptions") Integer maxReceptions,
+            @Param("location") String location,
+            @Param("city") String city,
+            @Param("postalCode") String postalCode,
             Pageable pageable);
 
     @Query("SELECT h FROM House h WHERE "
+            + "(:propertyName is null or h.propertyName = :propertyName) AND "
             + "(:minPrice is null or h.price >= :minPrice) AND "
             + "(:maxPrice is null or h.price <= :maxPrice) AND "
+            + "(:houseType is null or h.houseType = :houseType) AND "
             + "(:minArea is null or h.area >= :minArea) AND "
             + "(:maxArea is null or h.area <= :maxArea) AND "
             + "(:minBedrooms is null or h.bedrooms >= :minBedrooms) AND "
@@ -94,10 +106,15 @@ public interface HouseRepository extends JpaRepository<House,Long> {
             + "(:minBathrooms is null or h.bathrooms >= :minBathrooms) AND "
             + "(:maxBathrooms is null or h.bathrooms <= :maxBathrooms) AND "
             + "(:minReceptions is null or h.receptions >= :minReceptions) AND "
-            + "(:maxReceptions is null or h.receptions <= :maxReceptions)")
+            + "(:maxReceptions is null or h.receptions <= :maxReceptions) AND "
+            + "(:location is null or h.location = :location) AND "
+            + "(:city is null or h.city = :city) AND "
+            + "(:postalCode is null or h.postalCode = :postalCode)")
     List<House> searchWithIntervalAndWithoutPagination(
+            @Param("propertyName") String propertyName,
             @Param("minPrice") Long minPrice,
             @Param("maxPrice") Long maxPrice,
+            @Param("houseType") String houseType,
             @Param("minArea") Long minArea,
             @Param("maxArea") Long maxArea,
             @Param("minBedrooms") Integer minBedrooms,
@@ -105,7 +122,12 @@ public interface HouseRepository extends JpaRepository<House,Long> {
             @Param("minBathrooms") Integer minBathrooms,
             @Param("maxBathrooms") Integer maxBathrooms,
             @Param("minReceptions") Integer minReceptions,
-            @Param("maxReceptions") Integer maxReceptions);
+            @Param("maxReceptions") Integer maxReceptions,
+            @Param("location") String location,
+            @Param("city") String city,
+            @Param("postalCode") String postalCode);
+
 }
+
 
 
