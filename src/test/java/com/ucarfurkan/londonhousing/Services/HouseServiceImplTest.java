@@ -122,37 +122,65 @@ class HouseServiceImplTest {
         assertEquals(1, page.getContent().size());
         assertEquals(house2,page.getContent().get(0));
         assertEquals("location2",page.getContent().get(0).getLocation());
+
+        when(houseRepository.searchWithoutPagination("property name2", null, null,
+                null, null, null, null,
+                null, null, null)).thenReturn(searchList);
+
+        List<House> houses = houseService.searchWithoutPagination("property name2", null, null,
+                null, null, null, null,
+                null, null, null);
+
+        assertEquals(1, houses.size());
+        assertEquals(house2, houses.get(0));
+        assertEquals("location2",houses.get(0).getLocation());
     }
 
-/*    @Test
+    @Test
     void searchWithIntervals(){
         Pageable pageable = PageRequest.of(0,10);
         Page<House> testHouse = new PageImpl<>(houseList,pageable,2);
 
-        when(houseService.searchWithIntervalAndPagination(300L,301L,null,null,
+        when(houseService.searchWithIntervalAndPagination(null,300L,301L,null,null,
                 null,null,null,null,
-                null,null,pageable)).thenReturn(testHouse);
+                null,null,null,null,null,null,pageable)).thenReturn(testHouse);
 
-        Page<House> page = houseService.searchWithIntervalAndPagination(300L,301L,null,null,
+        Page<House> page = houseService.searchWithIntervalAndPagination(null,300L,301L,null,null,
                 null,null,null,null,
-                null,null,pageable);
+                null,null,null,null,null,null,pageable);
 
         assertEquals(2, page.getContent().size());
         assertTrue(page.getContent().contains(house1));
         assertTrue(page.getContent().contains(house2));
 
-        when(houseService.searchWithIntervalAndPagination(300L,301L,null,null,
-                3,4,null,null,
-                null,null,pageable)).thenReturn(new PageImpl<>(new ArrayList<>(),pageable,0));
+        when(houseService.searchWithIntervalAndPagination(null,300L,301L,null,null,
+                null,3,4,null,null,
+                null,null,null,null,null,pageable)).thenReturn(new PageImpl<>(new ArrayList<>(),pageable,0));
 
-        Page<House> page1 = houseService.searchWithIntervalAndPagination(300L,301L,null,null,
+        Page<House> page1 = houseService.searchWithIntervalAndPagination(null,300L,301L,null,null,null,
                 3,4,null,null,
-                null,null,pageable);
+                null,null,null,null,null,pageable);
         assertEquals(0, page1.getContent().size());
         assertFalse(page1.getContent().contains(house1));
         assertFalse(page1.getContent().contains(house2));
 
-    }*/
+
+        when(houseRepository.searchWithIntervalAndWithoutPagination(null, 300L, 301L,
+                null, null, null, null,
+                null, null, null,null,null,null,null,null))
+                .thenReturn(houseList);
+
+        List<House> houses = houseService.searchWithIntervalAndWithoutPagination(null, 300L, 301L,
+                null, null, null, null,
+                null, null, null,null,null,null,
+                null, null);
+
+        assertEquals(2, houses.size());
+        assertTrue(houses.contains(house1));
+        assertTrue(houses.contains(house2));
+
+
+    }
 
 
 }

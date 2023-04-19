@@ -56,19 +56,6 @@ public class House{
     private String city;
     private String postalCode;
 
-    public House(String propertyName, Long price, String houseType, Long area, Integer bedrooms, Integer bathrooms, Integer receptions, String location, String city, String postalCode) {
-        this.propertyName = propertyName;
-        this.price = price;
-        this.houseType = houseType;
-        this.area = area;
-        this.bedrooms = bedrooms;
-        this.bathrooms = bathrooms;
-        this.receptions = receptions;
-        this.location = location;
-        this.city = city;
-        this.postalCode = postalCode;
-    }
-
     public House(Long l, String london, Integer v, Integer i) {
     }
 }

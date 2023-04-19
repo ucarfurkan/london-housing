@@ -75,7 +75,7 @@ public class HouseServiceImpl implements HouseService {
         try {
             return houseRepository.searchWithPagination(propertyName,price,houseType,area,bedrooms,bathrooms,receptions,location,city,postalCode, pageable);
         } catch(Exception ex){
-            throw new RuntimeException("Failed to search for houses", ex);
+            throw new RuntimeException("Failed to search for paginated houses", ex);
         }
     }
 
@@ -93,7 +93,7 @@ public class HouseServiceImpl implements HouseService {
         try {
             return houseRepository.searchWithIntervalAndPagination(propertyName, minPrice,maxPrice,houseType,minArea,maxArea,minBedrooms,maxBedrooms,minBathrooms,maxBathrooms,minReceptions,maxReceptions, location, city, postalCode, pageable);
         } catch(Exception ex){
-            throw new RuntimeException("Failed to search for houses within interval", ex);
+            throw new RuntimeException("Failed to search for paginated houses within interval", ex);
         }
     }
 

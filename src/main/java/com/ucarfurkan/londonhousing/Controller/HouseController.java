@@ -49,7 +49,7 @@ public class HouseController {
         houseService.deleteHouseById(id);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/houses/update")
     public House updateHouse(
                              @RequestParam(name = "id") Long id,
                              @RequestParam(name = "propertyName", required = false) String propertyName,
@@ -100,7 +100,7 @@ public class HouseController {
         return houseService.updateHouse(house);
     }
 
-    @GetMapping("/search")
+    @GetMapping("/houses/search")
     public List<House> search(
             @RequestParam(name = "propertyName", required = false) String propertyName,
             @RequestParam(name = "price", required = false) Long price,
@@ -125,7 +125,7 @@ public class HouseController {
         return houseService.searchWithoutPagination(propertyName, price, houseType, area, bedrooms, bathrooms, receptions, location, city, postalCode);
     }
 
-    @GetMapping("/search/interval")
+    @GetMapping("/houses/search/interval")
     public List<House> searchWithInterval(
             @RequestParam(name = "propertyName", required = false) String propertyName,
             @RequestParam(name = "price", required = false) String priceInterval,
