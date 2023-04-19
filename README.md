@@ -19,8 +19,9 @@ The controller has several endpoints for getting all houses, getting a house by 
 
 Let's see how to test that endpoints. Use this steps to start the project on your local:
 1. Clone the project with following command: `git clone https://github.com/ucarfurkan/london-housing.git`
-2. Move to the project file, then write `mvn clean package`
-3. Open your browser, go to the http://localhost:8080/swagger-ui/index.html
+2. Change the application.properties in order to access your own database. Then import the following dataset into the database: https://www.kaggle.com/datasets/arnavkulkarni/housing-prices-in-london (name of the database must be "london_housing" and name of the table must be "houses".)
+3. Move to the project file, then write `mvn clean package`
+4. Open your browser, go to the http://localhost:8080/swagger-ui/index.html
 
 You will see all endpoints that project has in it.  
 **1- update:** There are parameters, like: id, propertyName, price, houseType, area, bedrooms, bathrooms, receptions, location, city, and postalCode. Only id is required. When the operation is performed, the House object of the entered id will be found, and the non-empty values that are desired to be updated will be replaced with the value of the found object. If no value other than the id is given, the operation will send the House object with that id.
@@ -73,5 +74,17 @@ and if the request body you provided exists, when you execute the operation, the
 
 **8- delete/{id}:** It has only one parameter, id, and it's required. When you provide an id, if exists, it's going to be deleted when you perform this operation.
 
+## <ins>Entities</ins>
+### House: House.java is class definition for a House entity.
+
+## <ins>Repository</ins>
+### HouseRepository: 
+HouseRepository extends the JpaRepository interface. This interface defines four custom search queries using the @Query annotation. All four queries use the same WHERE clause to filter the House entities based on the provided parameters.
+
+## <ins>Serivce</ins>
+### HouseService:
+HouseService interface declares methods for CRUD operations and searching for houses with various parameters.
+### HouseServiceImpl:
+The HouseServiceImpl class implements the HouseService interface and provides implementations for all the methods declared in the interface. The class uses an instance of HouseRepository to interact with the database.
 
  
